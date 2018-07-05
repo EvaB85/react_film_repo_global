@@ -10,8 +10,9 @@ class App extends Component {
     return (
       <div className="App">
         <div className="film-library">
+          {/* component instance = <FilmListing /> */}
           <FilmListing films={TMDB.films} />
-          <FilmDetails films={TMDB.films} />
+          <FilmDetails film={TMDB.films[0]} />
         </div>
       </div>
     );

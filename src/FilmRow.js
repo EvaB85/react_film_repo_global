@@ -3,14 +3,15 @@ import FilmPoster from './FilmPoster';
 
 class FilmRow extends Component {
   render() {
-    // let posterUrl = 'https://image.tmdb.org/t/p/w780/' + this.props.film.poster_path;
-    let posterUrl = `https://image.tmdb.org/t/p/w780/${this.props.film.poster_path}`;
+    // const posterUrl = 'https://image.tmdb.org/t/p/w780' + this.props.film.poster_path;
+    let year = new Date(this.props.film.release_date).getFullYear();
     return (
       <div className="film-row">
-        <FilmPoster url={posterUrl} title={this.props.film.title} />
+        <FilmPoster film={this.props.film} />
+        
         <div className="film-summary">
-          <h1>{this.props.film.title}</h1>
-          <p>{new Date(this.props.film.release_date).getFullYear()}</p>
+          <h2>{this.props.film.title}</h2>
+          <p>{year}</p>
         </div>
       </div>
     );

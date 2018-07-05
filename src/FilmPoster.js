@@ -1,23 +1,12 @@
 import React, { Component } from 'react';
 
-// stateful component
-// class FilmPoster extends Component {
-//   render() {
-//     return (
-//       <div>
-//         <img src={this.props.url} alt="" />
-//       </div>
-//     );
-//   }
-// }
-
-// functional component
-const FilmPoster = props => {
-  return (
-    <div>
-      <img src={props.url} alt="" />
-    </div>
-  );
+class FilmPoster extends Component {
+  render() {
+    const posterUrl = 'https://image.tmdb.org/t/p/w780' + this.props.film.poster_path;
+    return (
+      <img src={posterUrl} alt={this.props.film.title} />
+    );
+  }
 }
 
 export default FilmPoster;

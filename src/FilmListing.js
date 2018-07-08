@@ -11,12 +11,17 @@ class FilmListing extends Component {
   };
 
     handleFilterClick = (filter) => {
-      console.log('Setting filter to ', filter)
       this.setState({filter: filter})
     }
+
   render() {
-    const safeArray = Array.from(this.props.films);
-    var allFilms = safeArray.map((film) => <FilmRow film={film} key={film.id} />)
+    const safeArray = (this.state.filter === 'all') ? Array.from(this.props.films) : Array.from(this.props.faves);
+    const allFilms = safeArray.map( (film) => <FilmRow film={film}
+                                                      key={film.id}
+                                                      onDetailsClick={() => this.props.onDetailsClick(film)}
+                                                      onFaveToggle={() => this.props.onFaveToggle(film)}
+                                                      isFave={ (this.props.faves.indexOf(film) > -1) ? true : false }
+                                            />)
     const all = this.state.filter === 'all' ? 'is-active' : '';
     const faves  = this.state.filter === 'faves' ? 'is-active' : '';
     return (
@@ -29,12 +34,12 @@ class FilmListing extends Component {
           </div>
           <div onClick={() => this.handleFilterClick('faves')} className={`film-list-filter ${faves}`} >
             FAVES
-            <span className="section-count">0</span>
+            <span className="section-count">{this.props.faves.length}</span>
           </div>
         </div>
-    {allFilms}
+        {allFilms}
       </div>
-    );
+    )
   }
 }
 

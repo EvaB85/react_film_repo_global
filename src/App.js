@@ -62,3 +62,5 @@ class App extends Component {
 
 
 export default App;
+
+//We will be refactoring this app using Context API...etc. 

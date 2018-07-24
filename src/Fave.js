@@ -1,25 +1,28 @@
-import React, { Component } from 'react';
+import React from 'react';
+import {FilmContext} from './FilmContext';
 
-class Fave extends Component {
-  constructor(props) {
-    super(props)
-    this.handleClick = this.handleClick.bind(this)
-  };
+const Fave = props => {
 
-  handleClick(e) {
-    e.stopPropagation()
-    console.log('Handling FAVE click')
-    this.props.onFaveToggle()
-  }
-
-  render() {
-    const isFave = (this.props.isFave) ? 'remove_from_queue' : 'add_to_queue'
-    return(
-      <div onClick={this.handleClick} className={`film-row-fave ${isFave}`}>
-        <p className="material-icons">{isFave}</p>
-      </div>
-    )
-  }
+  return (
+    <FilmContext.Consumer>
+      {
+        ({toggleFavorite}) => {
+          function handleClick(e) {
+            e.stopPropagation()
+            console.log("Handling FAVE click")
+            toggleFavorite(props.film)
+          }
+          const isFave = (props.isFave) ? 'remove_from_queue' : 'add_to_queue'
+          const classList = `film-row-fave ${isFave}`
+          return (
+            <div className={classList}>
+              <p onClick={(e) => handleClick(e)} className="material-icons">{isFave}</p>
+            </div>
+          )
+        }
+      }
+    </FilmContext.Consumer>
+  )
 }
 
-export default Fave;
+export default Fave
